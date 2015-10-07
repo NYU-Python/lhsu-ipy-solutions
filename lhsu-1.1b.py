@@ -70,7 +70,7 @@ def get_median(price_list):
 #this function intakes a list and outputs the centered median of the list
 def get_centered(price_list):
     centered_list = list(set(price_list))
-    get_median(centered_list)
+    return get_median(centered_list)
     
 #this function intakes a list and outputs the maximum of the list
 def get_max(price_list):
