@@ -3,7 +3,10 @@
 import csv
 import pandas as pd
 
-#from lhsu-1.1bfunctions import is_valid, get_data, get_median, get_centered, get_max, get_min, get_average
+#*******************
+#FUNCTIONS IN THIS SECTION
+#*******************
+
 
 #this function determines whether the input data is valid and also issues appropriate error messages
 #It takes in the 3 user input arguments and outputs a boolean value, indicating whether the data inputted is ok
