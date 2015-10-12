@@ -40,19 +40,30 @@ def is_valid(summary,days,ticker):
 #close price is in column 5
 def get_data(days,ticker):
     number_rows = int(days) #ensures that the days input will be converted to an int if it's not
-    #added one to number_rows var because it accounts for the header
     ticker_file = ticker + '.csv' #converts ticker into a file-name by appending .csv
     #with open (ticker_file,'rb') as infile:
     #    sheet = csv.reader(infile,dialect=csv.excel_tab,delimiter=",")
     
-    #importing the entire ticker file into my program using pandas
-    stock_data = pd.read_csv(ticker_file)
+    #opening the tickerfile and making an empty list to fill later
+    fh = open(ticker_file)
+    relevant_prices = []
     
-    #making a list of just the closing prices
-    closing_prices = stock_data.Close
+    #importing the entire list of ticker prices
+    for line in fh.readlines()[1:number_rows]:
+        columns = line.split(',')
+        floatprice = float(columns[4])
+        relevant_prices.append(floatprice)
     
-    #making a list of the closing prices for the applicable date range
-    relevant_prices = closing_prices[1:number_rows]
+    fh.close()
+    
+    #importing the entire ticker file into my program using pandas NOT USING
+    #stock_data = pd.read_csv(ticker_file)
+    
+    #making a list of just the closing prices NOT USING
+    #closing_prices = stock_data.Close
+    
+    #making a list of the closing prices for the applicable date range NOT USING
+    #relevant_prices = closing_prices[1:number_rows]
     
     return relevant_prices
         
