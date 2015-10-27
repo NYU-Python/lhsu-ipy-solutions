@@ -3,6 +3,10 @@
 import csv
 import pandas as pd
 
+valid_summary = ["maximum","minimum","average","median","centered"]
+valid_ticker = ["AAPL","FB","GOOG","LNKD","MSFT"] #list could also be built directly from file directory
+max_days = 251
+
 #*******************
 #FUNCTIONS IN THIS SECTION
 #*******************
@@ -14,23 +18,19 @@ import pandas as pd
 #days up to 251
 #tickers incl AAPL, FB, GOOG, LNKD, MSFT
 def is_valid(summary,days,ticker):
-    valid_summary = ["maximum","minimum","average","median","centered"]
-    valid_ticker = ["AAPL","FB","GOOG","LNKD","MSFT"] #list could also be built directly from file directory
-    max_days = 251
     if summary not in valid_summary:
         print ('Try again, your input for summary type was invalid. Valid values for the summary type are:')
         print valid_summary
-        data_ok = False
+        return False
     elif ticker not in valid_ticker:
         print ('Try again, I do not have a record of that ticker. I know about these tickers: ')
         print valid_ticker
-        data_ok = False
+        return False
     elif days > max_days:
         print ('Try again, I do not have that much data. I have up to ' + str(max_days) + ' days of price data.')
-        data_ok = False
+        return False
     else:
-        data_ok = True
-    return data_ok #this variable is a boolean that will be true if data is ok, false if not
+        return True
     
 
 #this function retrieves the appropriate number of data points as requested
@@ -101,8 +101,6 @@ def get_average(price_list):
 #SCRIPT STARTS HERE
 #********
 
-valid_summary = ["maximum","minimum","average","median","centered"]
-valid_ticker = ["AAPL","FB","GOOG","LNKD","MSFT"]
 
 #naming the variables to lead the if statements
 maximum = 'maximum'
@@ -114,11 +112,11 @@ centered = 'centered'
 data_ok = False
 
 #this loop will keep going until we get the correct format of input data
-while data_ok is False:
+while not data_ok:
     print('Options for summary include: ')
     print(valid_summary)
-    summarytype = input('What type of summary would you like?')
-    tradingdays = input('How many trading days would you like me to consider? I have 251 days worth of data. ')
+    summarytype = raw_input('What type of summary would you like?')
+    tradingdays = raw_input('How many trading days would you like me to consider? I have 251 days worth of data. ')
     print('Options for tickers include: ')
     print(valid_ticker)
     tickertoquery = raw_input('What ticker would you like to query for?')
@@ -127,15 +125,15 @@ while data_ok is False:
     
 list2calculate = get_data(tradingdays,tickertoquery)
 
-if summarytype is maximum:
+if summarytype == maximum:
     answer = get_max(list2calculate)
-elif summarytype is minimum:
+elif summarytype == minimum:
     answer = get_min(list2calculate)
-elif summarytype is average:
+elif summarytype == average:
     answer = get_average(list2calculate)
-elif summarytype is median:
+elif summarytype == median:
     answer = get_median(list2calculate)
-elif summarytype is centered:
+elif summarytype == centered:
     answer = get_centered(list2calculate)
 
 print tickertoquery
