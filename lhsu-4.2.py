@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 
-class PriceSummary():
-    def __init__(self,filename):
-        try:
-            fh=open(filename,'a')
-            self.handle = fh
-            self.name = filename
-        except IOError:
-            return None
-        
+class PriceSummary:
+    def __init__(self,ticker):
+        self.name = ticker
+
+    #probably preferable to import some other way, but not sure how so included the validations values here.
+    valid_ticker = ["AAPL","FB","GOOG","LNKD","MSFT"] #list could also be built directly from file directory
+    max_days = 251       
         
     #this function determines whether the input data is valid and also issues appropriate error messages
     #It takes in the 3 user input arguments and outputs a boolean value, indicating whether the data inputted is ok
@@ -16,16 +14,12 @@ class PriceSummary():
     #days up to 251
     #tickers incl AAPL, FB, GOOG, LNKD, MSFT
     def is_valid(days,ticker):
-        #probably preferable to import some other way, but not sure how so included the validations values here.
-        valid_ticker = ["AAPL","FB","GOOG","LNKD","MSFT"] #list could also be built directly from file directory
-        max_days = 251
-        
-        if ticker not in valid_ticker:
+        if ticker not in PriceSummary.valid_ticker:
             print ('Try again, I do not have a record of that ticker. I know about these tickers: ')
-            print valid_ticker
+            print PriceSummary.valid_ticker
             return False
         elif days > max_days:
-            print ('Try again, I do not have that much data. I have up to ' + str(max_days) + ' days of price data.')
+            print ('Try again, I do not have that much data. I have up to ' + str(PriceSummary.max_days) + ' days of price data.')
             return False
         else:
             return True
