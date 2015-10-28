@@ -4,10 +4,11 @@ class PriceSummary():
     def __init__(self,filename):
         try:
             fh=open(filename,'a')
+            self.handle = fh
+            self.name = filename
         except IOError:
             return None
-        self.handle = fh
-        self.name = filename
+        
         
     #this function determines whether the input data is valid and also issues appropriate error messages
     #It takes in the 3 user input arguments and outputs a boolean value, indicating whether the data inputted is ok
