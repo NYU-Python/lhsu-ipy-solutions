@@ -101,14 +101,6 @@ def get_average(price_list):
 #SCRIPT STARTS HERE
 #********
 
-
-#naming the variables to lead the if statements
-maximum = 'maximum'
-minimum = 'minimum'
-average = 'average'
-median = 'median'
-centered = 'centered'
-
 #this loop will keep going until we get the correct format of input data
 while True:
     print('Options for summary include: ')
@@ -124,15 +116,15 @@ while True:
     
 list2calculate = get_data(tradingdays,tickertoquery)
 
-if summarytype == maximum:
+if summarytype == "maximum":
     answer = get_max(list2calculate)
-elif summarytype == minimum:
+elif summarytype == "minimum":
     answer = get_min(list2calculate)
-elif summarytype == average:
+elif summarytype == "average":
     answer = get_average(list2calculate)
-elif summarytype == median:
+elif summarytype == "median":
     answer = get_median(list2calculate)
-elif summarytype == centered:
+elif summarytype == "centered":
     answer = get_centered(list2calculate)
 
 print tickertoquery
