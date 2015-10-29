@@ -109,10 +109,8 @@ average = 'average'
 median = 'median'
 centered = 'centered'
 
-data_ok = False
-
 #this loop will keep going until we get the correct format of input data
-while not data_ok:
+while True:
     print('Options for summary include: ')
     print(valid_summary)
     summarytype = raw_input('What type of summary would you like?')
@@ -121,7 +119,8 @@ while not data_ok:
     print(valid_ticker)
     tickertoquery = raw_input('What ticker would you like to query for?')
     tickertoquery = tickertoquery.upper()
-    data_ok = is_valid(summarytype,tradingdays,tickertoquery)
+    if is_valid(summarytype,tradingdays,tickertoquery) is True:
+        break
     
 list2calculate = get_data(tradingdays,tickertoquery)
 
